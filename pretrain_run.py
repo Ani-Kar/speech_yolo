@@ -26,7 +26,7 @@ parser.add_argument('--test_batch_size', type=int, default=100,
                     metavar='N', help='batch size for testing')
 parser.add_argument('--arc', default='VGG11',
                     help='network architecture: VGG11, VGG13, VGG16, VGG19')
-parser.add_argument('--epochs', type=int, default=100,
+parser.add_argument('--epochs', type=int, default=2,
                     metavar='N', help='number of epochs to train')
 parser.add_argument('--lr', type=float, default=0.001,
                     metavar='LR', help='learning rate')
@@ -80,19 +80,19 @@ train_dataset = ClassificationLoader(args.train_path, window_size=args.window_si
                                      window_type=args.window_type, normalize=args.normalize, max_len=args.max_len)
 train_loader = torch.utils.data.DataLoader(
     train_dataset, batch_size=args.batch_size, shuffle=True,
-    num_workers=20, pin_memory=args.cuda, sampler=None)
+    num_workers=1, pin_memory=args.cuda, sampler=None)
 
 valid_dataset = ClassificationLoader(args.valid_path, window_size=args.window_size, window_stride=args.window_stride,
                                      window_type=args.window_type, normalize=args.normalize, max_len=args.max_len)
 valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=args.batch_size, shuffle=None,
-                                           num_workers=20, pin_memory=args.cuda, sampler=None)
+                                           num_workers=1, pin_memory=args.cuda, sampler=None)
 
 test_dataset = ClassificationLoader(args.test_path, window_size=args.window_size, window_stride=args.window_stride,
                                     window_type=args.window_type, normalize=args.normalize, max_len=args.max_len)
 
 test_loader = torch.utils.data.DataLoader(
     test_dataset, batch_size=args.test_batch_size, shuffle=None,
-    num_workers=20, pin_memory=args.cuda, sampler=None)
+    num_workers=1, pin_memory=args.cuda, sampler=None)
 
 # build model
 if args.arc.startswith("VGG"):

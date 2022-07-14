@@ -8,7 +8,6 @@ import os
 import torch
 import math
 import utils
-
 import pdb
 
 import warnings
@@ -134,7 +133,7 @@ class SpeechYoloDataSet(Dataset):
             index2word = {}
             classes = np.loadtxt(words_list_file, dtype=str)
             if classes.size ==1:
-                classes = np.array([words_list])
+                classes = np.array([words_list_file])
             classes.sort()
             class_to_idx = {classes[i]: i for i in range(len(classes))}
 
